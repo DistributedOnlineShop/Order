@@ -14,9 +14,9 @@ type Order struct {
 	UserID            uuid.UUID        `json:"user_id"`
 	TotalPrice        pgtype.Numeric   `json:"total_price"`
 	Status            string           `json:"status"`
-	ShippingAddressID pgtype.UUID      `json:"shipping_address_id"`
-	CreatedAt         pgtype.TIMESTAMP(0) `json:"created_at"`
-	UpdatedAt         pgtype.TIMESTAMP(0) `json:"updated_at"`
+	ShippingAddressID uuid.UUID        `json:"shipping_address_id"`
+	CreatedAt         pgtype.Timestamp `json:"created_at"`
+	UpdatedAt         pgtype.Timestamp `json:"updated_at"`
 }
 
 type OrderItem struct {
@@ -27,6 +27,6 @@ type OrderItem struct {
 	Quantity  int32            `json:"quantity"`
 	Price     pgtype.Numeric   `json:"price"`
 	Total     pgtype.Numeric   `json:"total"`
-	CreatedAt pgtype.TIMESTAMP(0) `json:"created_at"`
-	UpdatedAt pgtype.TIMESTAMP(0) `json:"updated_at"`
+	CreatedAt pgtype.Timestamp `json:"created_at"`
+	UpdatedAt pgtype.Timestamp `json:"updated_at"`
 }

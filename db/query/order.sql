@@ -1,5 +1,6 @@
 -- name: CreateOrder :one
 INSERT INTO orders (
+    ORDER_ID,
     USER_ID,
     TOTAL_PRICE,
     STATUS,
@@ -8,7 +9,8 @@ INSERT INTO orders (
     $1,
     $2,
     $3,
-    $4
+    $4,
+    $5
 ) RETURNING *;
 
 -- name: GetOrderList :many

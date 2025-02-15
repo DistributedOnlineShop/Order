@@ -14,6 +14,7 @@ import (
 
 const createOrder = `-- name: CreateOrder :one
 INSERT INTO orders (
+    ORDER_ID,
     USER_ID,
     TOTAL_PRICE,
     STATUS,
@@ -22,19 +23,22 @@ INSERT INTO orders (
     $1,
     $2,
     $3,
-    $4
+    $4,
+    $5
 ) RETURNING order_id, user_id, total_price, status, shipping_address_id, created_at, updated_at
 `
 
 type CreateOrderParams struct {
+	OrderID           uuid.UUID      `json:"order_id"`
 	UserID            uuid.UUID      `json:"user_id"`
 	TotalPrice        pgtype.Numeric `json:"total_price"`
 	Status            string         `json:"status"`
-	ShippingAddressID pgtype.UUID    `json:"shipping_address_id"`
+	ShippingAddressID uuid.UUID      `json:"shipping_address_id"`
 }
 
 func (q *Queries) CreateOrder(ctx context.Context, arg CreateOrderParams) (Order, error) {
 	row := q.db.QueryRow(ctx, createOrder,
+		arg.OrderID,
 		arg.UserID,
 		arg.TotalPrice,
 		arg.Status,
@@ -102,8 +106,8 @@ WHERE
 `
 
 type UpdateOrderAddressParams struct {
-	OrderID           uuid.UUID   `json:"order_id"`
-	ShippingAddressID pgtype.UUID `json:"shipping_address_id"`
+	OrderID           uuid.UUID `json:"order_id"`
+	ShippingAddressID uuid.UUID `json:"shipping_address_id"`
 }
 
 func (q *Queries) UpdateOrderAddress(ctx context.Context, arg UpdateOrderAddressParams) (Order, error) {

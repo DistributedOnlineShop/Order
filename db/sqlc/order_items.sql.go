@@ -14,6 +14,7 @@ import (
 
 const createOrderItem = `-- name: CreateOrderItem :one
 INSERT INTO order_items (
+    OI_ID,
     ORDER_ID,
     PRODUCT_ID,
     pv_id,
@@ -26,11 +27,13 @@ INSERT INTO order_items (
     $3,
     $4,
     $5,
-    $6
+    $6,
+    $7
 ) RETURNING oi_id, order_id, product_id, pv_id, quantity, price, total, created_at, updated_at
 `
 
 type CreateOrderItemParams struct {
+	OiID      uuid.UUID      `json:"oi_id"`
 	OrderID   uuid.UUID      `json:"order_id"`
 	ProductID string         `json:"product_id"`
 	PvID      pgtype.Text    `json:"pv_id"`
@@ -41,6 +44,7 @@ type CreateOrderItemParams struct {
 
 func (q *Queries) CreateOrderItem(ctx context.Context, arg CreateOrderItemParams) (OrderItem, error) {
 	row := q.db.QueryRow(ctx, createOrderItem,
+		arg.OiID,
 		arg.OrderID,
 		arg.ProductID,
 		arg.PvID,

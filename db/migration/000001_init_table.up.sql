@@ -3,7 +3,7 @@ CREATE TABLE "orders" (
   "user_id" UUID NOT NULL,
   "total_price" DECIMAL(10,2) NOT NULL,
   "status" VARCHAR NOT NULL,
-  "shipping_address_id" UUID,
+  "shipping_address_id" UUID NOT NULL,
   "created_at" TIMESTAMP(0) NOT NULL DEFAULT NOW(),
   "updated_at" TIMESTAMP(0)
 );

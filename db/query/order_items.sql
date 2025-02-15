@@ -1,5 +1,6 @@
 -- name: CreateOrderItem :one
 INSERT INTO order_items (
+    OI_ID,
     ORDER_ID,
     PRODUCT_ID,
     pv_id,
@@ -12,7 +13,8 @@ INSERT INTO order_items (
     $3,
     $4,
     $5,
-    $6
+    $6,
+    $7
 ) RETURNING *;
 
 -- name: GetOrderItemList :many
