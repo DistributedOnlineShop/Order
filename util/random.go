@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"math/big"
 	"math/rand/v2"
 
@@ -34,4 +35,16 @@ func GenerateRandomNumeric() pgtype.Numeric {
 		Exp:   -2,
 		Valid: true,
 	}
+}
+
+func GenerateRandomProductID() string {
+	return "P" + fmt.Sprintf("%07d", rand.IntN(9999999)+1)
+}
+
+func GenerateRandomPvID() string {
+	return "PV" + fmt.Sprintf("%07d", rand.IntN(999999)+1)
+}
+
+func GenerateRandomInt32() int32 {
+	return rand.Int32N(1000) + 1
 }

@@ -36,7 +36,7 @@ type CreateOrderItemParams struct {
 	OiID      uuid.UUID      `json:"oi_id"`
 	OrderID   uuid.UUID      `json:"order_id"`
 	ProductID string         `json:"product_id"`
-	PvID      pgtype.Text    `json:"pv_id"`
+	PvID      string         `json:"pv_id"`
 	Quantity  int32          `json:"quantity"`
 	Price     pgtype.Numeric `json:"price"`
 	Total     pgtype.Numeric `json:"total"`

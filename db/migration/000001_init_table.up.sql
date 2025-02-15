@@ -12,7 +12,7 @@ CREATE TABLE "order_items" (
   "oi_id" UUID PRIMARY KEY NOT NULL,
   "order_id" UUID NOT NULL,
   "product_id" VARCHAR(12) NOT NULL,
-  "pv_id" VARCHAR(12),
+  "pv_id" VARCHAR(12) NOT NULL,
   "quantity" INT NOT NULL,
   "price" DECIMAL(10,2) NOT NULL,
   "total" DECIMAL(10,2) NOT NULL,
