@@ -8,7 +8,7 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 )
 
-func GenerateRandomStatus() string {
+func GenerateStatus() string {
 	var orderStatuses = []string{
 		"PENDING",
 		"PROCESSING",
@@ -25,7 +25,7 @@ func GenerateRandomStatus() string {
 	return orderStatuses[rand.IntN(len(orderStatuses))]
 }
 
-func GenerateRandomNumeric() pgtype.Numeric {
+func GenerateNumeric() pgtype.Numeric {
 	intPart := rand.IntN(100000)
 	fracPart := rand.IntN(100)
 	value := int64(intPart) + int64(fracPart)/100.0
@@ -37,14 +37,14 @@ func GenerateRandomNumeric() pgtype.Numeric {
 	}
 }
 
-func GenerateRandomProductID() string {
+func GenerateProductID() string {
 	return "P" + fmt.Sprintf("%07d", rand.IntN(9999999)+1)
 }
 
-func GenerateRandomPvID() string {
+func GeneratePvID() string {
 	return "PV" + fmt.Sprintf("%07d", rand.IntN(999999)+1)
 }
 
-func GenerateRandomInt32() int32 {
+func GenerateInt32() int32 {
 	return rand.Int32N(1000) + 1
 }

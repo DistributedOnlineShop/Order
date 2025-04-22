@@ -14,8 +14,8 @@ func CreateRandomOrder(t *testing.T, userID uuid.UUID) Order {
 	data := CreateOrderParams{
 		OrderID:           util.CreateUUID(),
 		UserID:            userID,
-		TotalPrice:        util.GenerateRandomNumeric(),
-		Status:            util.GenerateRandomStatus(),
+		TotalPrice:        util.GenerateNumeric(),
+		Status:            util.GenerateStatus(),
 		ShippingAddressID: util.CreateUUID(),
 	}
 
@@ -71,7 +71,7 @@ func TestUpdateOrderStatus(t *testing.T) {
 
 	newData := UpdateOrderStatusParams{
 		OrderID: order.OrderID,
-		Status:  util.GenerateRandomStatus(),
+		Status:  util.GenerateStatus(),
 	}
 
 	updateStatus, err := testStore.UpdateOrderStatus(context.Background(), newData)

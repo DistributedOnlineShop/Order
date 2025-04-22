@@ -14,11 +14,11 @@ func CreateRandomOrderItem(t *testing.T, orderID uuid.UUID) OrderItem {
 	data := CreateOrderItemParams{
 		OiID:      util.CreateUUID(),
 		OrderID:   orderID,
-		ProductID: util.GenerateRandomProductID(),
-		PvID:      util.GenerateRandomPvID(),
-		Quantity:  util.GenerateRandomInt32(),
-		Price:     util.GenerateRandomNumeric(),
-		Total:     util.GenerateRandomNumeric(),
+		ProductID: util.GenerateProductID(),
+		PvID:      util.GeneratePvID(),
+		Quantity:  util.GenerateInt32(),
+		Price:     util.GenerateNumeric(),
+		Total:     util.GenerateNumeric(),
 	}
 
 	oI, err := testStore.CreateOrderItem(context.Background(), data)
@@ -73,9 +73,9 @@ func TestUpdateOrderItem(t *testing.T) {
 
 	newData := UpdateOrderItemParams{
 		OiID:     oi.OiID,
-		Quantity: util.GenerateRandomInt32(),
-		Price:    util.GenerateRandomNumeric(),
-		Total:    util.GenerateRandomNumeric(),
+		Quantity: util.GenerateInt32(),
+		Price:    util.GenerateNumeric(),
+		Total:    util.GenerateNumeric(),
 	}
 
 	updatedOI, err := testStore.UpdateOrderItem(context.Background(), newData)
@@ -85,4 +85,13 @@ func TestUpdateOrderItem(t *testing.T) {
 	require.NotEqual(t, oi.Quantity, updatedOI.Quantity)
 	require.NotEqual(t, oi.Total, updatedOI.Total)
 	require.NotZero(t, updatedOI.UpdatedAt)
+}
+
+func TestDeleteOrderItem(t *testing.T) {
+	id := util.CreateUUID()
+	order := CreateRandomOrder(t, id)
+	oi := CreateRandomOrderItem(t, order.OrderID)
+
+	err := testStore.DeleteOrderItem(context.Background(), oi.OiID)
+	require.NoError(t, err)
 }
